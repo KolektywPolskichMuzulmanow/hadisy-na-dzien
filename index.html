@@ -36,15 +36,16 @@
 <script>
 const csvUrl = "https://raw.githubusercontent.com/KolektywPolskichMuzulmanow/hadisy-na-dzien/refs/heads/main/Hadisy%20-%20Arkusz1.csv";
 
-// Parsowanie CSV z GitHub
+// Wczytanie i parsowanie CSV z GitHub
 Papa.parse(csvUrl, {
     download: true,
-    header: true,  // zakładam, że pierwszy wiersz CSV ma nagłówki
+    header: true, // zakładamy, że pierwszy wiersz to nagłówki: Treść, Źródło
     complete: function(results) {
-        const data = results.data.filter(row => row.Treść && row.Źródło); // tylko pełne wiersze
+        // Filtrujemy tylko pełne wiersze
+        const data = results.data.filter(row => row.Treść && row.Źródło);
 
-        // wybieramy hadis na dzisiaj (można też losowo)
-        const today = new Date().getDate() % data.length;
+        // Wybieramy hadis na dzisiejszy dzień
+        const today = new Date().getDate() % data.length; 
         const row = data[today];
 
         document.getElementById("hadith").textContent = '"' + row.Treść + '"';
@@ -53,6 +54,7 @@ Papa.parse(csvUrl, {
     error: function(err) {
         console.error(err);
         document.getElementById("hadith").textContent = "Błąd wczytywania hadisu.";
+        document.getElementById("reference").textContent = "";
     }
 });
 </script>
