@@ -16,20 +16,23 @@ body { font-family: Arial; max-width: 800px; margin: 50px auto; line-height: 1.6
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script>
-const csvUrl = "https://raw.githubusercontent.com/KolektywPolskichMuzulmanow/hadisy-na-dzien/main/Hadisy%20-%20Arkusz1.csv";
+// RELATYWNY URL do CSV w tym samym folderze co index.html
+const csvUrl = "Hadisy - Arkusz1.csv";
 
 Papa.parse(csvUrl, {
     download: true,
     header: true,
-    skipEmptyLines: true, // ignorujemy puste wiersze
+    skipEmptyLines: true,
     complete: function(results) {
-        console.log("CSV data:", results.data); // <- możesz sprawdzić w konsoli
+        console.log("CSV data:", results.data);
+
+        // upewniamy się, że nagłówki CSV to dokładnie: hadith i reference
         let hadisyData = results.data.filter(row => 
             row.hadith && row.hadith.trim() !== "" &&
             row.reference && row.reference.trim() !== ""
         );
 
-        console.log("Filtered hadisy:", hadisyData); // <- sprawdź, ile danych przeszło filtr
+        console.log("Filtered hadisy:", hadisyData);
 
         if(hadisyData.length === 0){
             document.getElementById("hadith").textContent = "Brak danych w CSV.";
