@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Hadis na dzień</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: transparent;
+    }
+
+    #hadith-box {
+      text-align: center;
+      max-width: 600px;
+      padding: 1.5rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    blockquote {
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    #reference {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="hadith-box">
+    <h2>Hadis na dzień</h2>
+    <blockquote id="hadith">Ładowanie…</blockquote>
+    <p id="reference"></p>
+  </div>
+
+  <script>
+    (async function () {
+      try {
+        const url = "https://script.google.com/macros/s/AKfycbzwBadFo5N6nsYecAi7fFQA0-AM2FiqeMf41vdHTwlY1q44toT9TWTMKzxNhCJGXCiW/exec";
+
+        const res = await fetch(url);
+        const text = await res.text();
+
+        // CSV → linie (pomijamy nagłówek)
+        const lines = text.trim().split("\n").slice(1);
+
+        // stabilny "hadis na dzień"
+        const start = new Date(2024, 0, 1);
+        const today = new Date();
+        const index =
+          Math.floor((today - start) / 86400000) % lines.length;
+
+        // bezpieczny split CSV
+        const row = lines[index].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+
+        const hadith = row[0].replace(/^"|"$/g, '');
+        const reference = row[1]?.replace(/^"|"$/g, '') || '';
+
+        document.getElementById("hadith").textContent = `„${hadith}”`;
+        document.getElementById("reference").textContent = `— ${reference}`;
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById("hadith").textContent =
+          "Nie udało się wczytać hadisu.";
+      }
+    })();
+  </script>
+
+</body>
+</html>
