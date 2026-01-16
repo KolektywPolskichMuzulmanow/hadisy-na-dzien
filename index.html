@@ -38,10 +38,10 @@ const csvUrl = "https://raw.githubusercontent.com/KolektywPolskichMuzulmanow/had
 
 Papa.parse(csvUrl, {
     download: true,
-    header: true,  // zakładamy, że nagłówki to Treść i Źródło
+    header: true,  // nagłówki w CSV: hadith, reference
     complete: function(results) {
         // lokalna zmienna, żeby nie kolidować z innymi skryptami
-        let hadisyData = results.data.filter(row => row.Treść && row.Źródło);
+        let hadisyData = results.data.filter(row => row.hadith && row.reference);
 
         if(hadisyData.length === 0){
             document.getElementById("hadith").textContent = "Brak danych w CSV.";
@@ -53,8 +53,8 @@ Papa.parse(csvUrl, {
         const today = new Date().getDate() % hadisyData.length; 
         const row = hadisyData[today];
 
-        document.getElementById("hadith").textContent = '"' + row.Treść + '"';
-        document.getElementById("reference").textContent = "— " + row.Źródło;
+        document.getElementById("hadith").textContent = '"' + row.hadith + '"';
+        document.getElementById("reference").textContent = "— " + row.reference;
     },
     error: function(err) {
         console.error(err);
