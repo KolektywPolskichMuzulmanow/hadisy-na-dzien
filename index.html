@@ -2,28 +2,11 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hadisy na dziś</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 50px auto;
-    line-height: 1.6;
-    padding: 0 20px;
-    background-color: #f9f9f9;
-    color: #333;
-  }
-  #hadith {
-    font-size: 1.3em;
-    margin-bottom: 20px;
-    font-style: italic;
-  }
-  #reference {
-    text-align: right;
-    font-weight: bold;
-    color: #555;
-  }
+body { font-family: Arial; max-width: 800px; margin: 50px auto; line-height: 1.6; padding: 0 20px; background:#f9f9f9; color:#333;}
+#hadith { font-style: italic; font-size: 1.3em; margin-bottom: 20px;}
+#reference { text-align: right; font-weight: bold; color: #555;}
 </style>
 </head>
 <body>
@@ -31,17 +14,19 @@
 <div id="hadith">Ładowanie hadisu...</div>
 <div id="reference"></div>
 
-<!-- PapaParse do parsowania CSV -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script>
 const csvUrl = "https://raw.githubusercontent.com/KolektywPolskichMuzulmanow/hadisy-na-dzien/main/Hadisy%20-%20Arkusz1.csv";
 
 Papa.parse(csvUrl, {
     download: true,
-    header: true,  // nagłówki w CSV: hadith, reference
+    header: true,
     complete: function(results) {
-        // lokalna zmienna, żeby nie kolidować z innymi skryptami
-        let hadisyData = results.data.filter(row => row.hadith && row.reference);
+        // filtrujemy wiersze z danymi
+        let hadisyData = results.data.filter(row => 
+            row.Hadith && row.Hadith.trim() !== "" &&
+            row.reference && row.reference.trim() !== ""
+        );
 
         if(hadisyData.length === 0){
             document.getElementById("hadith").textContent = "Brak danych w CSV.";
@@ -49,12 +34,11 @@ Papa.parse(csvUrl, {
             return;
         }
 
-        // wybieramy hadis na dzisiejszy dzień (powtarza się, jeśli koniec listy)
-        const today = new Date().getDate() % hadisyData.length; 
+        const today = new Date().getDate() % hadisyData.length;
         const row = hadisyData[today];
 
-        document.getElementById("hadith").textContent = '"' + row.hadith + '"';
-        document.getElementById("reference").textContent = "— " + row.reference;
+        document.getElementById("hadith").textContent = '"' + row.Hadith.trim() + '"';
+        document.getElementById("reference").textContent = "— " + row.reference.trim();
     },
     error: function(err) {
         console.error(err);
