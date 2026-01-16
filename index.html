@@ -1,368 +1,61 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hadisy na dziś</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 50px auto;
-      line-height: 1.6;
-      padding: 0 20px;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    #hadith {
-      font-size: 1.3em;
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-    #reference {
-      text-align: right;
-      font-weight: bold;
-      color: #555;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hadisy na dziś</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 50px auto;
+    line-height: 1.6;
+    padding: 0 20px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  #hadith {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  #reference {
+    text-align: right;
+    font-weight: bold;
+    color: #555;
+  }
+</style>
 </head>
 <body>
 
-  <div id="hadith">Ładowanie hadisu...</div>
-  <div id="reference"></div>
+<div id="hadith">Ładowanie hadisu...</div>
+<div id="reference"></div>
 
-  <script>
-    // =========================
-    // TUTAJ WKLEJ SWOJĄ TABLICĘ HADIS
-    // =========================
-    const hadisy = [
-      { text: "Relacjonował Anas Ibn Malik, niech Bóg będzie z niego rad, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: Jeśli muzułmaninowi umrze troje dzieci, które nie osiągnęły dojrzałości, Bóg wprowadzi go do Raju za sprawą Jego Miłosierdzia względem nich.", source: "Sahih al-Buchari" },
-      { text: "Relacjonowała ‘A’isza, niech Bóg będzie z niej rad, że do Proroka, niech będzie z nim pokój i miłosierdzie, przyszedł pewien koczownik i powiedział mu: – Całujecie swoje dzieci?! My ich nie całujemy! – Cóż mam uczynić, jeśli Bóg pozbawił twoje serce miłosierdzia? – odparł Prorok.", source: "Sahih al-Buchari" },
-      // ... tutaj wklej wszystkie pozostałe hadisy
-    ];
-const hadisy = [
-  {
-    text: "Relacjonował Anas Ibn Malik, niech Bóg będzie z niego rad, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: Jeśli muzułmaninowi umrze troje dzieci, które nie osiągnęły dojrzałości, Bóg wprowadzi go do Raju za sprawą Jego Miłosierdzia względem nich.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Relacjonowała ‘A’isza, niech Bóg będzie z niej rad, że do Proroka, niech będzie z nim pokój i miłosierdzie, przyszedł pewien koczownik i powiedział mu: – Całujecie swoje dzieci?! My ich nie całujemy! – Cóż mam uczynić, jeśli Bóg pozbawił twoje serce miłosierdzia? – odparł Prorok.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Relacjonował ‘Umar Ibn al-Chattab, niech Bóg będzie z niego rad, że wśród przyprowadzonych pewnego razu jeńców była karmiąca kobieta, która gdy znalazła dziecko, brała je do siebie i karmiła (mając nadzieję, że odnalazła swoje zagubione dziecko). – Czy myślicie, że ta kobieta mogłaby wrzucić swoje dziecko do ognia? – spytał nas Prorok, niech będzie z nim pokój i miłosierdzie. – Oczywiście, że nie, jeśli będzie w stanie do tego nie dopuścić! – odparliśmy. – Bóg jest bardziej miłosierny dla Swoich sług niż ta kobieta dla swojego dziecka!",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Hurajra, niech Bóg będzie z niego rad, że słyszał, jak Posłaniec Boga, niech będzie z nim pokój i miłosierdzie, powiedział: Bóg podzielił miłosierdzie na sto części. Dziewięćdziesiąt dziewięć zatrzymał u Siebie, a jedną wysłał na Ziemię. To za sprawą tej części stworzenia miłują się nawzajem, tak że konie odsuwają kopyta dalej od swoich dzieci, by nie nadepnąć na nie.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Relacjonował Abu Hurajra, niech Bóg będzie z niego rad: Podczas jednej z modlitw, którą odmówiliśmy wraz z Posłańcem Boga, niech będzie z nim pokój i miłosierdzie, pewien koczownik powiedział: „Boże, zmiłuj się nade mną i Muhammadem i nikim więcej!” Po zakończeniu modlitwy taslimem Prorok powiedział mu: Zawężyłeś to, co jest niezwykle szerokie (tj. Miłosierdzie Boże).",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał An-Nu’man Ibn Baszir, niech Bóg będzie z niego rad, że Posłaniec Boga, niech będzie z nim pokój i miłosierdzie, powiedział: Wierni, obdarzający się wzajemnie miłosierdziem, miłością i współczuciem, są niczym jedno ciało: jeśli choć jedna jego część niedomaga, dotyka je bezsenność i gorączka.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Anas Ibn Malik, niech Bóg będzie z niego rad, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: Jeśli muzułmanin posadzi drzewo, z którego jeść będzie człowiek lub zwierzę, będzie mu to policzone jako jałmużna.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Dżarir Ibn ‘Abd Allah al-Badżali, niech Bóg będzie z niego rad, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: Nie dostąpi miłosierdzia ten, kto nie przejawia go wobec innych.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazała ‘A’isza, niech Bóg będzie z niej rad, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: (Archanioł) Gabriel tak często nakazywał mi dobre traktowanie sąsiadów, aż pomyślałem, że uczyni ich w liczbie moich spadkobierców.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Relacjonował Abu Szurajh, niech Bóg będzie z niego rad, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: – Na Boga, nie wierzy! Na Boga, nie wierzy! Na Boga, nie wierzy! – Kto taki? – spytano. – Ten, od kogo zła nie jest bezpieczny jego sąsiad.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Hurajra, niech Bóg będzie z niego rad, że Posłaniec Boga, niech będzie z nim pokój i miłosierdzie, powiedział: Kto wierzy w Boga i Dzień Ostatni, niech nie krzywdzi swojego sąsiada; kto wierzy w Boga i Dzień Ostatni, niech hojnie podejmuje swojego gościa; kto wierzy w Boga i Dzień Ostatni, niech mówi dobre słowa lub milczy.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Dżabir Ibn ‘Abd Allah, niech Bóg będzie z nich rad, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: Każdy dobry uczynek jest jałmużną.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazała ‘A’isza, niech Bóg będzie z niej rad, że Posłaniec Boga, niech będzie z nim pokój i miłosierdzie, powiedział: Zaprawdę, Bóg lubi, by przejawiać dobroć w każdej sprawie.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Musa, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: Wierni są dla siebie nawzajem niczym cegły budowli, które podtrzymują jedna drugą – po czym połączył palce.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Anas Ibn Malik, niech Bóg będzie z niego rad: Prorok, niech będzie z nim pokój i miłosierdzie, nie obrażał nikogo, nie mówił niegodziwych rzeczy ani nie przeklinał nikogo. Gdy chciał napomnieć kogoś z nas, mówił: Co z nim? Niech jego czoło pokryje się pyłem (tj. niech więcej się modli)!",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Dżabir, niech Bóg będzie z niego rad, że nie zdarzyło się nigdy, by Prorok, niech będzie z nim pokój i miłosierdzie, powiedział nie, gdy o coś go proszono.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Służyłem Prorokowi, niech będzie z nim pokój i miłosierdzie, przez dziesięć lat, i ani razu nie powiedział mi: „Uff!” (z niezadowolenia), ani „Czemu to zrobiłeś?!” lub „Czemu tego nie zrobiłeś?!”",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Anas Ibn Malik, niech Bóg będzie z niego rad, że Posłaniec Boga, niech będzie z nim pokój i miłosierdzie, powiedział: Nie nienawidźcie siebie nawzajem, nie żywcie wobec siebie zawiści, nie odwracajcie się od siebie plecami, lecz bądźcie – o, słudzy Boży – braćmi! Nie wolno muzułmaninowi zerwać kontaktu z jego bratem na dłużej niż trzy dni.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Hurajra, niech Bóg będzie z niego rad, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: Strzeżcie się podejrzeń, albowiem podejrzenia to najbardziej fałszywa mowa, nie poszukujcie niedostatków u innych ludzi, nie szpiegujcie się nawzajem, nie podwyższajcie ceny (w zmowie ze sprzedawcą, by prawdziwy kupujący zapłacił więcej), nie żywcie wobec siebie zawiści, nie odwracajcie się do siebie plecami i nie nienawidźcie siebie nawzajem, lecz bądźcie – o, słudzy Boży – braćmi!",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Ajjub al-Ansari, niech Bóg będzie z niego rad, że Posłaniec Boga, niech będzie z nim pokój i miłosierdzie, powiedział: Nie wolno zrywać kontaktu z bratem na dłużej niż trzy dni, podczas których gdy widzą się, jeden odwraca się od drugiego. Lepszym spośród nich jest ten, kto pierwszy pozdrowi drugiego.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Hurajra, niech Bóg będzie z niego rad, że Posłaniec Boga, niech będzie z nim pokój i miłosierdzie, powiedział: Nie jest silnym ten, kto często zwycięża, lecz ten, kto panuje nad sobą, gdy jest zagniewany.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał ‘Imran Ibn Husajn, niech Bóg będzie z niego rad, że Prorok, niech będzie z nim pokój i miłosierdzie, powiedział: Wstydliwość zawsze przynosi dobro.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Relacjonował Ibn ‘Abbas, niech Bóg będzie z niego rad: Posłaniec Boga był najbardziej hojnym spośród ludzi, a najbardziej szczodry był w ramadanie, gdy każdej nocy spotykał go Gabriel, by nauczać go Koranu. Zaprawdę, Posłaniec Boga, niech będzie z nim pokój i miłosierdzie, był bardziej szczodry od porywistego wiatru (przynoszącego życiodajny deszcz).",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał An-Nu'man ibn Baszir że Prorok Muhammad (ﷺ) powiedział: Przykładem wiernych we wzajemnej miłości, miłosierdziu i współczuciu jest jedno ciało: jeśli jedna jego część cierpi, całe ciało reaguje bezsennością i gorączką.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Abu Musa przekazał, że Prorok (ﷺ) powiedział: Wierzący wobec drugiego wierzącego jest jak budowla, której różne części wzmacniają się nawzajem.",
-    source: "Sahih al-Buchari/Sahih Muslim"
-  },
-  {
-    text: "Przekazał Kathir ibn Qays: Kathir ibn Qays powiedział: Siedziałem z AbudDardą w meczecie w Damaszku. Przyszedł do niego pewien człowiek i powiedział: AbudDarda, przybyłem do ciebie z miasta Posłańca Allah (ﷺ) z powodu tradycji, którą usłyszałem od Posłańca Allah (ﷺ). Nie przybyłem w żadnym innym celu. Powiedział: Słyszałem, jak Posłańce Allah (ﷺ) powiedział: Jeśli ktoś podróżuje drogą w poszukiwaniu wiedzy, Allah sprawi, że będzie podróżował jedną z dróg Raju. Aniołowie opuszczą skrzydła w swojej wielkiej przyjemności z tym, kto szuka wiedzy, mieszkańcy niebios i Ziemi oraz ryby w głębinach będą prosić o przebaczenie dla uczonego człowieka. Wyższość uczonego nad pobożnym jest jak wyższość księżyca, w noc, gdy jest w pełni, nad resztą gwiazd. Uczeni są dziedzicami Proroków, a Prorocy nie pozostawiają ani dinara, ani dirhama, pozostawiając jedynie wiedzę, a ten, kto ją bierze, bierze obfitą porcję.",
-    source: "Sunan Abi Dawud 3641"
-  },
-  {
-    text: "Prorok (ﷺ) powiedział: „Kiedy Allah kocha niewolnika, woła Jibrila i mówi: „Kocham tego i tego; więc go kochaj”. Wtedy Jibril go kocha. Po tym on (Jibril) ogłasza mieszkańcom niebios, że Allah kocha tego i tego; więc go kochaj; a mieszkańcy niebios (aniołowie) również go kochają, a następnie sprawiają, że ludzie na ziemi go kochają”.",
-    source: "Riyad as-Salihin 387"
-  },
-  {
-    text: "Przekazano od Abu Hurairah, że Posłańce Allah (ﷺ) powiedział: „Kiedy recytujący mówi Amin, to powiedz Amin, ponieważ aniołowie mówią Amin, a jeśli Amin danej osoby pokrywa się z Amin (wypowiedzianym przez) aniołów, jej poprzednie grzechy zostaną odpuszczone”.",
-    source: "Sunan Ibn Majah 851"
-  },
-  {
-    text: "Przekazał Abu Huraira: „Każdego dnia dwaj aniołowie zstępują z Nieba i jeden z nich mówi: 'O Allah! Zrekompensuj każdemu, kto wydaje na Twoją Sprawę', a drugi (anioł) mówi: 'O Allah! Zniszcz każdego skąpca'.",
-    source: "Sahih al-Bukhari 1442"
-  },
-  {
-    text: "Yahya przekazał mi od Malika od Yahya ibn Said, że Said ibn al-Musayyab zwykł mawiać: „Ktokolwiek modli się na bezwodnej, spustoszonej ziemi – anioł modli się po jego prawej stronie, oraz anioł modli się po jego lewej stronie. Następnie, gdy wzywa do modlitwy (przez adhan i iqama), lub woła iqama, aniołowie jak góry modlą się za nim”.",
-    source: "Muwatta Malik"
-  },
-  {
-    text: "Relacjonował Anas, że Prorok ﷺ powiedział: 'Wyjdzie z Ognia Piekielnego ten, kto mówił, że nie ma bóstwa prócz Boga Jedynego, a w jego sercu będzie dobro choćby na wagę ziarenka jęczmienia; i wyjdzie z Ognia Piekielnego ten, kto mówił, że nie ma bóstwa prócz Boga Jedynego, a w jego sercu będzie dobro choćby na wagę ziarenka pszenicy; i wyjdzie z Ognia Piekielnego ten, kto mówił, że nie ma bóstwa prócz Boga Jedynego, a w jego sercu będzie dobro choćby na wagę pyłku.'",
-    source: "Sahih al-Bukhari 44"
-  },
-  {
-    text: "`Umar b. Muhammad b. Zaid b. `Abdullah b. `Umar b. al-Khattab przekazał na podstawie autorytetu swego ojca `Abdullah b. `Umara, że ​​Posłaniec Allah (ﷺ) powiedział: Kiedy mieszkańcy Raju pójdą do Raju, a mieszkańcy Piekła pójdą do Piekła, śmierć zostanie wezwana i umieszczona między Rajem a Piekłem, a następnie zabita, a następnie ogłaszający ogłosi: O mieszkańcy Raju, nie ma śmierci. O mieszkańcy Ognia Piekielnego, nie ma śmierci. I zwiększy to radość mieszkańców Raju i zwiększy smutek mieszkańców Ognia Piekielnego.",
-    source: "Sahih Muslim 2850b"
-  }
-];
-hadisy.push(
-  {
-    text: "Przekazał Abu Hurajra, niech Bóg będzie z niego rad: Kiedy człowiek mówi prawdę, Bóg zapisuje to jako dobroć, a kiedy kłamie, zapisuje to jako grzech.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Anas Ibn Malik: Kiedy człowiek rozmawia z drugim człowiekiem i okazuje mu uprzejmość, Bóg zapisuje to jako jałmużnę.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Przekazał Abu Musa: Posłaniec Boga powiedział: Kto naucza człowieka dobrej wiedzy, zyskuje taką samą nagrodę jak ten, kto ją stosuje.",
-    source: "Sunan Abi Dawud"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Kiedy wierny podnosi swoje ręce w modlitwie i prosi Boga o dobro, Bóg daje mu więcej, niż prosił.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał ‘A’isza: Posłaniec Boga zawsze uczył nas, że miłosierdzie wobec stworzeń prowadzi do miłosierdzia Bożego wobec nas.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Kto w nocy modli się i czuwa, Bóg odpuszcza mu grzechy dnia poprzedniego.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abdullah Ibn Mas’ud: Posłaniec Boga powiedział: Najlepszym wśród ludzi jest ten, który przynosi pożytek innym.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Przekazał Abu Darda: Kto przynosi radość biednemu lub potrzebującemu, Bóg zapisuje to jako jałmużnę.",
-    source: "Sunan Ibn Majah"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Prorok powiedział: Nie zazdrośćcie jedni drugim, nie nienawidźcie się, nie odwracajcie się plecami od siebie, lecz bądźcie braćmi wierzącymi.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Anas Ibn Malik: Posłaniec Boga zawsze okazywał dobroć wobec sąsiadów i nakazywał to robić.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Bóg jest bardziej miłosierny wobec swoich sług niż matka wobec swojego dziecka.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Jabir Ibn Abdullah: Każdy uczynek dobry zapisany jest jako jałmużna.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał ‘A’isza: Posłaniec Boga zawsze zachęcał do miłosierdzia i dobroci wobec innych.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Musa: Wierni są dla siebie nawzajem jak cegły budowli – wzajemnie się podtrzymują.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Anas Ibn Malik: Prorok nigdy nie obrażał nikogo ani nie przeklinał, zawsze mówił prawdę i napominał łagodnie.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Jabir: Nigdy nie zdarzyło się, by Prorok powiedział 'nie', gdy o coś go proszono w sprawach uczciwych.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Anas Ibn Malik: Nie nienawidźcie siebie nawzajem i nie zerwijcie kontaktu z bratem muzułmaninem na dłużej niż trzy dni.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Strzeżcie się podejrzeń, albowiem podejrzenia są najfałszywszą mową.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Ajjub al-Ansari: Nie wolno zerwać kontaktu z bratem na dłużej niż trzy dni; lepszy jest ten, kto pierwszy pozdrowi.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Silny człowiek nie jest tym, kto pokonuje innych, lecz tym, kto panuje nad sobą, gdy jest zagniewany.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał ‘Imran Ibn Husajn: Wstydliwość zawsze przynosi dobro.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Ibn ‘Abbas: Posłaniec Boga był najbardziej hojnym, zwłaszcza w Ramadanie.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał An-Nu’man ibn Baszir: Wierzący we wzajemnej miłości, miłosierdziu i współczuciu są jak jedno ciało.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Przekazał Abu Musa: Wierzący wobec drugiego wierzącego jest jak cegły wzmacniające nawzajem budowlę.",
-    source: "Sahih al-Buchari/Sahih Muslim"
-  },
-  {
-    text: "Przekazał Kathir ibn Qays: Kto szuka wiedzy, Allah sprawi, że będzie podróżował drogą do Raju.",
-    source: "Sunan Abi Dawud"
-  },
-  {
-    text: "Prorok (ﷺ): Kiedy Allah kocha niewolnika, aniołowie kochają go, a mieszkańcy Ziemi również.",
-    source: "Riyad as-Salihin 387"
-  },
-  {
-    text: "Przekazano od Abu Hurairah: Kiedy recytujący mówi 'Amin', aniołowie mówią 'Amin' i grzechy zostaną odpuszczone.",
-    source: "Sunan Ibn Majah 851"
-  },
-  {
-    text: "Przekazał Abu Huraira: Każdego dnia aniołowie modlą się za tym, kto wydaje na Sprawę Boga i przeciwko skąpcowi.",
-    source: "Sahih al-Bukhari 1442"
-  },
-  {
-    text: "Yahya od Malika: Kto modli się na bezwodnej ziemi, aniołowie modlą się za nim.",
-    source: "Muwatta Malik"
-  },
-  {
-    text: "Relacjonował Anas: Ten, kto w sercu ma dobro choćby ziarenko jęczmienia, wyjdzie z Piekła.",
-    source: "Sahih al-Bukhari 44"
-  },
-  {
-    text: "`Umar b. Muhammad: Po śmierci ogłoszenie: 'Nie ma śmierci' zwiększa radość mieszkańców Raju i smutek mieszkańców Piekła.",
-    source: "Sahih Muslim 2850b"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Kiedy człowiek mówi prawdę, Bóg zapisuje to jako dobroć, a kiedy kłamie, zapisuje to jako grzech.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Anas Ibn Malik: Kiedy człowiek okazuje innym uprzejmość, Bóg zapisuje to jako jałmużnę.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Przekazał Abu Musa: Kto naucza człowieka dobrej wiedzy, zyskuje taką samą nagrodę jak ten, kto ją stosuje.",
-    source: "Sunan Abi Dawud"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Kiedy wierny podnosi ręce w modlitwie, Bóg daje mu więcej, niż prosił.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazała ‘A’isza: Miłosierdzie wobec stworzeń prowadzi do miłosierdzia Bożego wobec nas.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Kto w nocy modli się i czuwa, Bóg odpuszcza mu grzechy dnia poprzedniego.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Abdullah Ibn Mas’ud: Najlepszym wśród ludzi jest ten, który przynosi pożytek innym.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Przekazał Abu Darda: Kto przynosi radość biednemu lub potrzebującemu, Bóg zapisuje to jako jałmużnę.",
-    source: "Sunan Ibn Majah"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Nie zazdrośćcie sobie nawzajem, nie nienawidźcie się, bądźcie braćmi wierzącymi.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Anas Ibn Malik: Posłaniec Boga zawsze okazywał dobroć wobec sąsiadów i nakazywał to robić.",
-    source: "Sahih Muslim"
-  },
-  {
-    text: "Przekazał Abu Hurajra: Bóg jest bardziej miłosierny wobec swoich sług niż matka wobec swojego dziecka.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazał Jabir Ibn Abdullah: Każdy uczynek dobry zapisany jest jako jałmużna.",
-    source: "Sahih al-Buchari"
-  },
-  {
-    text: "Przekazała ‘A’isza: Posłaniec Boga zawsze zachęcał do miłosierdzia i dobroci wobec innych.",
-    source: "Sahih al-Buchari"
-  }
-);
+<!-- PapaParse do parsowania CSV -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script>
+const csvUrl = "https://raw.githubusercontent.com/KolektywPolskichMuzulmanow/hadisy-na-dzien/refs/heads/main/Hadisy%20-%20Arkusz1.csv";
 
-    // =========================
-    // KONIEC WKLEJANIA TABLICY
-    // =========================
+// Parsowanie CSV z GitHub
+Papa.parse(csvUrl, {
+    download: true,
+    header: true,  // zakładam, że pierwszy wiersz CSV ma nagłówki
+    complete: function(results) {
+        const data = results.data.filter(row => row.Treść && row.Źródło); // tylko pełne wiersze
 
-    // Funkcja losująca hadis
-    (function () {
-      // Losowy hadis
-      const randomIndex = Math.floor(Math.random() * hadisy.length);
-      const row = hadisy[randomIndex];
+        // wybieramy hadis na dzisiaj (można też losowo)
+        const today = new Date().getDate() % data.length;
+        const row = data[today];
 
-      document.getElementById("hadith").textContent = '"' + row.text + '"';
-      document.getElementById("reference").textContent = "— " + row.source;
-    })();
-  </script>
+        document.getElementById("hadith").textContent = '"' + row.Treść + '"';
+        document.getElementById("reference").textContent = "— " + row.Źródło;
+    },
+    error: function(err) {
+        console.error(err);
+        document.getElementById("hadith").textContent = "Błąd wczytywania hadisu.";
+    }
+});
+</script>
 
 </body>
 </html>
